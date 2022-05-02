@@ -1,12 +1,23 @@
 .libraryContainer{
     display: flex;
-    width: 800px;
-    height: 200px;
-    justify-content: space-around;
-}
-.container{
-    display:flex;
     flex-direction: column;
+    width: 1000px;
+    height: 200px;
+}
+.header{
+    display:flex;
+}
+.mainTable{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.oneBook {
+    display: flex;
+    justify-content: space-between;
+}
+.one {
+    width:200px;
 }
 
 

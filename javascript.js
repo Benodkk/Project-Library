@@ -1,10 +1,6 @@
 let myLibrary=[];
 
-let titleContainer=document.querySelector(".titleContainer")
-let authorContainer=document.querySelector(".authorContainer")
-let pagesContainer=document.querySelector(".pagesContainer")
-let readContainer=document.querySelector(".readContainer")
-let delateLine=document.querySelector('.delateLine')
+let mainTable=document.querySelector('.mainTable')
 
 let popUpForm=document.querySelector('.popUp')
 
@@ -57,77 +53,70 @@ add.addEventListener('click', () => {
 }
 )
 
+
+
+
 let preventDuplication = 0;
 let line = 0;
 
 function segregation(){
-
-  for(let i=0; i<myLibrary.length; i++){
-    if (preventDuplication==1){
-      titleContainer.textContent='Title:'
-      authorContainer.textContent='Author:'
-      pagesContainer.textContent='Pages:'
-      readContainer.textContent='Read/Not Read:'
-      preventDuplication=0
-    }
-
-    if(i%4==0){
-      let titleDiv = document.createElement("div");
-      titleContainer.appendChild(titleDiv)  
-      titleDiv.textContent=myLibrary[i];
-    }
-    else if(i%4==1){
-      let authorDiv = document.createElement("div");
-      authorContainer.appendChild(authorDiv)  
-      authorDiv.textContent=myLibrary[i];
-    }
-    else if(i%4==2){
-      let pagesDiv = document.createElement("div");
-      pagesContainer.appendChild(pagesDiv)  
-      pagesDiv.textContent=myLibrary[i];
-    }
-    else if(i%4==3){
-      let readDiv = document.createElement("div");
-      readContainer.appendChild(readDiv)  
-      readDiv.textContent=myLibrary[i];
+    let oneBook = document.createElement('div');
+    mainTable.appendChild(oneBook);
+    oneBook.classList.add('oneBook')
 
 
-    }
-  }
-  preventDuplication=1;
-  line+=1
-
-
-
-  let delateLineBtn = document.createElement('button')
-  delateLineBtn.innerHTML='DELETE'
-  delateLine.appendChild(delateLineBtn)
-  delateLineBtn.classList.add(`${line}`)
-
-
-  function dupaa () {
-    let masakra=Number(delateLineBtn.classList.value)
-    let child = delateLine.lastElementChild;
-
-    for(let i=1; i<=line; i++){
-      if(i==masakra){
-        myLibrary.splice(masakra*4-4,4)
-        line-=1;
+    for (let i=0; i<myLibrary.length; i++){
+      if(i%4==0){
+        let oneTitle = document.createElement("div");
+        oneBook.appendChild(oneTitle)  
+        oneTitle.textContent=myLibrary[i];
+        oneTitle.classList.add('one')
+      }
+      else if(i%4==1){
+        let oneAuthor = document.createElement("div");
+        oneBook.appendChild(oneAuthor)  
+        oneAuthor.textContent=myLibrary[i];
+        oneAuthor.classList.add('one')
+      }
+      else if(i%4==2){
+        let onePages = document.createElement("div");
+        oneBook.appendChild(onePages)  
+        onePages.textContent=myLibrary[i];
+        onePages.classList.add('one')
+      }
+      else if(i%4==3){
+        let oneRead = document.createElement("button");
+        oneBook.appendChild(oneRead)  
+        oneRead.textContent=myLibrary[i];
+        oneRead.classList.add('one')
+        if(readOrNot==true){
+          oneRead.style.backgroundColor='rgb(68, 187, 68)'
+        }
+        else if(readOrNot==false){
+          oneRead.style.backgroundColor='rgb(255, 62, 62)'
+        }
+        oneRead.addEventListener('click', () => {
+          if(oneRead.textContent=="Not Read"){
+            oneRead.style.backgroundColor='rgb(68, 187, 68)'
+            oneRead.textContent="Read"
+          }
+          else if(oneRead.textContent=="Read"){
+            oneRead.style.backgroundColor='rgb(255, 62, 62)'
+            oneRead.textContent='Not Read'
+          }
+        })
       }
     }
-    console.log(line)
-    while (child) {
-      delateLine.removeChild(child);
-      child = delateLine.lastElementChild
-    }
-    for (let i=1; i<=line; i++){
-      let delateLineBtn = document.createElement('button')
-      delateLineBtn.innerHTML='DELETE'
-      delateLine.appendChild(delateLineBtn)
-      delateLineBtn.classList.add(`${i}`)
-      delateLineBtn.addEventListener('click', dupaa)
-    }
+
+    let delateLineBtn = document.createElement('button')
+    delateLineBtn.textContent='DELETE'
+    delateLineBtn.classList.add('one')
+    oneBook.appendChild(delateLineBtn)
+
+    delateLineBtn.addEventListener('click', () => {
+      oneBook.remove()
+    })
+    myLibrary=[]
   }
-  delateLineBtn.addEventListener('click', dupaa)
-}
+
 
