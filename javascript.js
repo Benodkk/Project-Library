@@ -23,17 +23,18 @@ newBookBtn.addEventListener('click', () => {
 
 let form = document.getElementById('bookForm')
 
-function Book(title, author, pages, read){
-  this.title=title;
-  this.author=author;
-  this.pages=pages;
-  this.read=read;
-  myLibrary.push(title)
-  myLibrary.push(author)
-  myLibrary.push(pages)
-  myLibrary.push(read)
+class Book {
+  constructor(title, author, pages, read){
+    this.title=title;
+    this.author=author;
+    this.pages=pages;
+    this.read=read;
+    myLibrary.push(title)
+    myLibrary.push(author)
+    myLibrary.push(pages)
+    myLibrary.push(read)
+  }
 }
-
 
 add.addEventListener('click', () => {
   event.preventDefault();
