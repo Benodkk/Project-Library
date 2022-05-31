@@ -23,6 +23,40 @@ newBookBtn.addEventListener('click', () => {
 
 let form = document.getElementById('bookForm')
 
+// form validation
+
+const bookTitle = document.getElementById('bookTitle')
+const authorr = document.getElementById('author')
+const pagess = document.getElementById('pages')
+
+function formValidity(){
+  console.log('dupa')
+  if (bookTitle.validity.valueMissing) {
+    bookTitle.setCustomValidity('Give the book title')
+    bookTitle.reportValidity();
+  }
+  else {
+    bookTitle.setCustomValidity('')
+  }
+
+  if (authorr.validity.valueMissing) {
+    authorr.setCustomValidity('Give the book author')
+    authorr.reportValidity();
+  }
+  else {
+    authorr.setCustomValidity('')
+  }
+
+  if (pagess.validity.valueMissing) {
+    pagess.setCustomValidity('How many pages the book have?')
+    pagess.reportValidity();
+  }
+  else {
+    pagess.setCustomValidity('')
+  }
+} 
+
+
 class Book {
   constructor(title, author, pages, read){
     this.title=title;
@@ -38,6 +72,10 @@ class Book {
 
 add.addEventListener('click', () => {
   event.preventDefault();
+  if (bookTitle.validity.valueMissing || authorr.validity.valueMissing || pagess.validity.valueMissing){
+    formValidity()
+  }
+  else{ 
   title=form.elements['bookTitle'].value;
   author=form.elements['author'].value;
   pages=form.elements['pages'].value;
@@ -50,7 +88,9 @@ add.addEventListener('click', () => {
   }
   new Book(title, author, pages, read);
   segregation()
-  console.log(myLibrary)
+  }
+
+
 }
 )
 
@@ -119,5 +159,4 @@ function segregation(){
     })
     myLibrary=[]
   }
-
 
